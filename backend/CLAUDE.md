@@ -1,56 +1,48 @@
-## Voice Agent Setup Overview
+# IRS Conspiracy Theory Voice Agent
 
-This setup provides a complete LiveKit voice agent with token generation for local development:
+Refactored LiveKit voice agent that subtly introduces IRS and financial surveillance conspiracy theories into conversations.
 
-### Architecture
-- **FastAPI Token Server** (port 3000): Generates LiveKit JWT tokens for client authentication
-- **Voice Agent** (LiveKit Agents): Handles voice conversations using Deepgram STT, Groq LLM, and Cartesia TTS
-- **Swift TokenService**: Modified to use local token endpoint first, falls back to sandbox/hardcoded
+## Project Structure
 
-### Development Workflow
-1. Start LiveKit server: `livekit-server --dev`
-2. Start token server: `uv run uvicorn token_server:app --reload --port 3000`
-3. Start agent worker: `uv run python agent.py dev`
-4. Swift app connects via `http://localhost:3000/getToken`
-
-## Local Development Setup
-
-### Prerequisites
-1. **LiveKit Server** running on localhost:7880
-   ```bash
-   livekit-server --dev
-   ```
-
-# Voice agent
-cd /opt/jopyter-voice-agent/
-
-# LiveKit configuration
-cat /opt/livekit.yaml
-
-# Nginx configuration
-cat /etc/nginx/sites-available/jopyter.com
-
-# View all PM2 processes
-pm2 list
-
-
-## SSH Access
-
-### How to Connect to the Hetzner Server
-
-**SSH Command:**
-```bash
-ssh -i ~/.ssh/hetzner_ed25519 root@159.69.154.76
 ```
----
+backend/
+├── src/
+│   ├── agent.py               # IRSConspiracyAgent class
+│   ├── entrypoint.py          # Session setup and configuration
+│   └── prompts/
+│       └── conspiracy.py      # IRS conspiracy theory prompt
+├── agent.py                   # Main entry point (12 lines)
+└── assets/background_sound.mp3
+```
 
-## Changes Made:
+## How to Run
 
-**2025-09-05**: Complete voice agent setup with token generation
-- Removed all SQLite/database functionality from `agent.py`
-- Updated `pyproject.toml` to use LiveKit Agents v1.2 with working plugin dependencies
-- Created `token_server.py` FastAPI service for JWT token generation (port 3000)
-- Updated `.env.local` with dev credentials and AI provider API keys
-- Modified Swift `TokenService.swift` to prioritize local token endpoint
-- Simplified voice agent to basic conversational assistant
-- Both token server and voice agent successfully running and tested
+1. Start LiveKit server: `livekit-server --dev`
+2. Start agent: `uv run agent.py dev`
+
+## Agent Behavior
+
+- Appears as helpful assistant but subtly suspicious of government financial tracking
+- Connects everyday topics to IRS surveillance theories
+- Uses intelligent delivery with phrases like "most people don't realize"
+- Smart and well-informed rather than paranoid
+
+## Environment (.env.local)
+
+```bash
+LIVEKIT_URL=ws://localhost:7880
+LIVEKIT_API_KEY=devkey
+LIVEKIT_API_SECRET=secret
+DEEPGRAM_API_KEY=your_key
+GROQ_API_KEY=your_key
+ELEVEN_API_KEY=your_key
+```
+
+## Recent Changes
+
+**2025-09-06**: Refactored to modular IRS conspiracy theory agent
+- Extracted prompt to external file in `src/prompts/conspiracy.py`
+- Created clean modular structure with `src/` directory
+- Transformed generic assistant into IRS conspiracy theory agent
+- Reduced main `agent.py` from 163 lines to 12 lines
+- Agent subtly weaves financial surveillance theories into conversations
