@@ -24,6 +24,7 @@ from livekit.agents import (
 )
 
 from livekit.plugins import deepgram, elevenlabs, groq, silero, turn_detector
+from livekit.plugins.elevenlabs.tts import VoiceSettings
 from livekit.plugins.turn_detector.english import EnglishModel
 
 from .agent import IRSConspiracyAgent
@@ -62,10 +63,15 @@ async def entrypoint(ctx: JobContext):
         llm=groq.LLM(
             model="moonshotai/kimi-k2-instruct", api_key=os.getenv("GROQ_API_KEY")
         ),
-        # TTS: ElevenLabs
+        # TTS: ElevenLabs with slower, more realistic speed
         tts=elevenlabs.TTS(
             voice_id="khG0vfcoSY6A5BLrsJre",  # Specified voice ID
             model="eleven_multilingual_v2",
+            voice_settings=VoiceSettings(
+                stability=0.71,
+                similarity_boost=0.5,
+                speed=0.9,  # 10% slower for more realistic conversation pace
+            ),
         ),
         # VAD: Silero (using default settings - customization happens via AgentSession)
         vad=silero.VAD.load(),
