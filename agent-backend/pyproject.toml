@@ -1,0 +1,19 @@
+[project]
+name = "voice-agent"
+version = "0.1.0"
+description = "LiveKit Agents voice assistant with Deepgram, Groq, and Cartesia"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # LiveKit Agents framework and plugins
+    "livekit-agents[cartesia,deepgram,groq,silero,turn-detector]~=1.2",
+    "livekit-plugins-noise-cancellation~=0.2",
+    # Token generation
+    "livekit-api>=0.6.0",
+    # FastAPI for token server
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    # Utilities
+    "python-dotenv>=1.1.1",
+    "loguru>=0.7.3",
+]
