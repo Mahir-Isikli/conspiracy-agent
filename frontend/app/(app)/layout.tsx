@@ -18,7 +18,10 @@ export default async function AppLayout({ children }: AppLayoutProps) {
             RECORDING
           </span>
         </div>
-        <span className="text-fg0 font-mono text-xs font-bold tracking-wider uppercase glitch" data-text="CLASSIFIED INFORMATION • ACCESS LEVEL 7">
+        <span
+          className="text-fg0 glitch font-mono text-xs font-bold tracking-wider uppercase"
+          data-text="CLASSIFIED INFORMATION • ACCESS LEVEL 7"
+        >
           CLASSIFIED INFORMATION • ACCESS LEVEL 7
         </span>
       </header>

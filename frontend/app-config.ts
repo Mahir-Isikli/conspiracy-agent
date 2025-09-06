@@ -2,7 +2,7 @@ import type { AppConfig } from './lib/types';
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
   companyName: 'Classified',
-  pageTitle: 'The Truth They Don\'t Want You to Know',
+  pageTitle: "The Truth They Don't Want You to Know",
   pageDescription: 'Uncover the reality of IRS surveillance and financial tracking systems',
 
   supportsChatInput: true,
