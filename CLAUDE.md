@@ -1,5 +1,7 @@
 # IRS Conspiracy Theory Voice Agent Project
 
+**Repository:** [conspiracy-agent](https://github.com/Mahir-Isikli/conspiracy-agent)
+
 A specialized LiveKit-based voice AI agent that subtly introduces IRS and financial surveillance conspiracy theories into conversations.
 
 ## Project Structure

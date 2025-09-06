@@ -1,4 +1,4 @@
-# Deployment Guide - Voice Agent with Coolify
+# Deployment Guide - Conspiracy Agent with Coolify
 
 This guide explains how to deploy the IRS Conspiracy Voice Agent using Coolify for automated CI/CD.
 
@@ -47,7 +47,7 @@ Before deploying to Coolify, test locally:
 ### 2. Configure GitHub Integration
 
 1. **Connect Repository:**
-   - Repository: `https://github.com/Mahir-Isikli/voice-therapy-app.git`
+   - Repository: `https://github.com/Mahir-Isikli/conspiracy-agent.git`
    - Branch: `main`
    - Enable auto-deployment on push
 
