@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # LiveKit Server
+  livekit-server:
+    image: livekit/livekit-server:latest
+    command: --dev
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+    environment:
+      - LIVEKIT_KEYS=devkey:secret
+    networks:
+      - voice-agent-network
+
+  # Voice Agent Backend
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - livekit-server
+    environment:
+      - LIVEKIT_URL=ws://livekit-server:7880
+      - LIVEKIT_API_KEY=devkey
+      - LIVEKIT_API_SECRET=secret
+      - DEEPGRAM_API_KEY=${DEEPGRAM_API_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - ELEVEN_API_KEY=${ELEVEN_API_KEY}
+    volumes:
+      - ./backend:/app
+    networks:
+      - voice-agent-network
+    restart: unless-stopped
+
+  # Frontend Web App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_LIVEKIT_URL=ws://localhost:7880
+      - LIVEKIT_API_KEY=devkey
+      - LIVEKIT_API_SECRET=secret
+    depends_on:
+      - livekit-server
+      - backend
+    networks:
+      - voice-agent-network
+    restart: unless-stopped
+
+networks:
+  voice-agent-network:
+    driver: bridge
