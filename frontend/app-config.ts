@@ -1,9 +1,9 @@
 import type { AppConfig } from './lib/types';
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
-  pageDescription: 'A voice agent built with LiveKit',
+  companyName: 'Classified',
+  pageTitle: 'The Truth They Don\'t Want You to Know',
+  pageDescription: 'Uncover the reality of IRS surveillance and financial tracking systems',
 
   supportsChatInput: true,
   supportsVideoInput: true,
@@ -11,10 +11,10 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   isPreConnectBufferEnabled: true,
 
   logo: '/lk-logo.svg',
-  accent: '#002cf2',
+  accent: '#00ff41',
   logoDark: '/lk-logo-dark.svg',
-  accentDark: '#1fd5f9',
-  startButtonText: 'Start call',
+  accentDark: '#00cc33',
+  startButtonText: 'UNCOVER THE TRUTH',
 
   agentName: undefined,
 };
