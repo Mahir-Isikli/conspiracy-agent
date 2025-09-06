@@ -18,6 +18,7 @@ from livekit.agents import (
     metrics,
     RoomInputOptions,
     RunContext,
+    BackgroundAudioPlayer,
 )
 
 # Import plugins for AI providers
@@ -66,6 +67,11 @@ async def entrypoint(ctx: JobContext):
 
     # Connect to the LiveKit room
     await ctx.connect()
+
+    # Create background audio player with ambient sound
+    background_audio = BackgroundAudioPlayer(
+        ambient_sound=os.path.join(os.path.dirname(__file__), "assets", "background_sound.mp3")
+    )
 
     # Create the voice AI session with improved interruption handling
     session = AgentSession(
@@ -116,6 +122,9 @@ async def entrypoint(ctx: JobContext):
         ),
     )
 
+    # Start the background audio player
+    await background_audio.start(room=ctx.room, agent_session=session)
+
     # Greeting message
     await session.generate_reply(
         instructions="Greet the user in a friendly way and ask how you can help them today."
@@ -126,7 +135,12 @@ async def entrypoint(ctx: JobContext):
         summary = usage_collector.get_summary()
         logger.info(f"Usage summary: {summary}")
 
+    # Cleanup background audio on shutdown
+    async def cleanup_background_audio():
+        await background_audio.aclose()
+
     ctx.add_shutdown_callback(log_usage)
+    ctx.add_shutdown_callback(cleanup_background_audio)
 
 
 # Prewarm function to load models before agent starts
