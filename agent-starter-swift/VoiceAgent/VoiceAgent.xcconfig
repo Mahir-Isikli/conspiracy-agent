@@ -1,5 +1,0 @@
-#include ".env.xcconfig"
-
-// Let Xcode handle these automatically for personal team signing
-// PRODUCT_BUNDLE_IDENTIFIER=com.livekit.example.VoiceAssistant
-// DEVELOPMENT_TEAM = 76TVFCUKK7;
