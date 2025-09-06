@@ -24,6 +24,7 @@ from livekit.agents import (
 )
 
 from livekit.plugins import deepgram, elevenlabs, groq, silero, turn_detector
+from livekit.plugins.turn_detector.english import EnglishModel
 
 from .agent import IRSConspiracyAgent
 
@@ -68,14 +69,14 @@ async def entrypoint(ctx: JobContext):
         ),
         # VAD: Silero (using default settings - customization happens via AgentSession)
         vad=silero.VAD.load(),
-        # Turn detection configuration
-        turn_detection="vad",  # Use VAD-based turn detection
+        # Turn detection configuration - context-aware model
+        turn_detection=EnglishModel(),  # Use context-aware turn detection
         # Interruption handling configuration
         allow_interruptions=True,  # Allow user to interrupt
         min_interruption_duration=0.2,  # Shorter duration for faster interrupts (was 0.5)
         min_interruption_words=0,  # Minimum words required for interruption
-        min_endpointing_delay=0.3,  # Faster response after user stops (was 0.4)
-        max_endpointing_delay=1.5,  # Much shorter max wait (was 6.0)
+        min_endpointing_delay=0.5,  # Wait time when model indicates turn complete (default for context-aware)
+        max_endpointing_delay=6.0,  # Max wait when model indicates user will continue speaking
         discard_audio_if_uninterruptible=True,  # Drop audio when agent can't be interrupted
         # Additional configuration
         preemptive_generation=True,  # Start generating response early for faster responses
