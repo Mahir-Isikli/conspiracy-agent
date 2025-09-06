@@ -21,7 +21,7 @@ from livekit.agents import (
 )
 
 # Import plugins for AI providers
-from livekit.plugins import deepgram, cartesia, groq, silero, turn_detector
+from livekit.plugins import deepgram, elevenlabs, groq, silero, turn_detector
 
 # Load environment variables from .env.local
 load_dotenv(".env.local", override=True)
@@ -77,14 +77,10 @@ async def entrypoint(ctx: JobContext):
         llm=groq.LLM(
             model="llama-3.3-70b-versatile", api_key=os.getenv("GROQ_API_KEY")
         ),
-        # TTS: Cartesia with new voice
-        tts=cartesia.TTS(
-            model="sonic-2",  # Latest Cartesia model
-            voice=os.getenv(
-                "CARTESIA_VOICE_ID", "a167e0f3-df7e-4d52-a9c3-f949145efdab"
-            ),  # New voice
-            api_key=os.getenv("CARTESIA_API_KEY"),
-            language="en",
+        # TTS: ElevenLabs
+        tts=elevenlabs.TTS(
+            voice_id="khG0vfcoSY6A5BLrsJre",  # Specified voice ID
+            model="eleven_multilingual_v2"
         ),
         # VAD: Silero (using default settings - customization happens via AgentSession)
         vad=silero.VAD.load(),

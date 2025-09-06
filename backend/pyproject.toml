@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     # LiveKit Agents framework and plugins
-    "livekit-agents[cartesia,deepgram,groq,silero,turn-detector]~=1.2",
+    "livekit-agents[elevenlabs,deepgram,groq,silero,turn-detector]~=1.2",
     "livekit-plugins-noise-cancellation~=0.2",
     # Token generation
     "livekit-api>=0.6.0",

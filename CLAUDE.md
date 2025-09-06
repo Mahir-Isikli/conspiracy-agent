@@ -44,7 +44,7 @@ uv run agent.py dev
 This connects the Python agent to LiveKit and handles voice processing using:
 - **Speech-to-Text**: Deepgram
 - **LLM**: Groq
-- **Text-to-Speech**: Cartesia
+- **Text-to-Speech**: ElevenLabs
 
 ### Step 3: Start React Frontend
 ```bash
@@ -64,9 +64,7 @@ LIVEKIT_API_SECRET=secret
 # AI Provider API Keys
 DEEPGRAM_API_KEY=your_deepgram_key
 GROQ_API_KEY=your_groq_key
-CARTESIA_API_KEY=your_cartesia_key
-CARTESIA_VOICE_ID=a5bae724-1a3e-4974-8e00-02a1d44a4634
-CARTESIA_TTS_MODEL=sonic-2
+ELEVEN_API_KEY=your_elevenlabs_key
 ```
 
 ### Frontend (`frontend/.env`)
@@ -90,7 +88,7 @@ LIVEKIT_API_SECRET=secret
 - FastAPI (token generation, if needed)
 - Deepgram (STT)
 - Groq (LLM)
-- Cartesia (TTS)
+- ElevenLabs (TTS)
 
 **Frontend:**
 - Next.js 15 with Turbopack
