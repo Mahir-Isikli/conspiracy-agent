@@ -23,6 +23,12 @@ RUN uv sync --frozen
 # Copy application code
 COPY . .
 
+# Remove local .env file that conflicts with Docker environment
+RUN rm -f .env.local
+
+# Download AI models (turn detector)
+RUN uv run agent.py download-files
+
 # Create assets directory if it doesn't exist
 RUN mkdir -p assets
 

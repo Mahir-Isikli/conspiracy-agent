@@ -7,7 +7,8 @@ interface AppLayoutProps {
 
 export default async function AppLayout({ children }: AppLayoutProps) {
   const hdrs = await headers();
-  const { companyName, logo, logoDark } = await getAppConfig(hdrs);
+  // Not using config values in this conspiracy-themed layout
+  await getAppConfig(hdrs);
 
   return (
     <>

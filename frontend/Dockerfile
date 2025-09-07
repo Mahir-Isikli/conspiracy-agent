@@ -23,6 +23,9 @@ COPY . .
 # Create environment file from template if it doesn't exist
 RUN if [ ! -f .env ]; then cp .env.example .env; fi
 
+# Format the code to ensure consistent formatting in Docker environment
+RUN pnpm run format
+
 # Build the application
 RUN pnpm run build
 

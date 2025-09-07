@@ -29,8 +29,9 @@ from livekit.plugins.turn_detector.english import EnglishModel
 
 from .agent import IRSConspiracyAgent
 
-# Load environment variables from .env.local
-load_dotenv(".env.local", override=True)
+# Load environment variables from .env.local only if not running in Docker
+if not os.getenv("RUNNING_IN_DOCKER"):
+    load_dotenv(".env.local", override=True)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
